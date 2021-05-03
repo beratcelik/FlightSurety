@@ -10,17 +10,21 @@ To install, download or clone the repo, then:
 
 `npm install`
 `truffle compile`
+`truffle develop`
 
 ## Develop Client
 
 To run truffle tests:
 
-`truffle test ./test/flightSurety.js`
-`truffle test ./test/oracles.js`
+`test ./test/flightSurety.js`
+`test ./test/oracles.js`
 
 To use the dapp:
 
-`truffle migrate`
+`migrate`
+
+Open a new terminal
+
 `npm run dapp`
 
 To view dapp:
