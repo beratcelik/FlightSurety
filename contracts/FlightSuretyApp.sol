@@ -1,7 +1,9 @@
 pragma solidity ^0.4.25;
 
+import "./FlightSuretyData.sol";
+
 // It's important to avoid vulnerabilities due to numeric overflow bugs
-// OpenZeppelin's SafeMath library, when used correctly, protects agains such bugs
+// OpenZeppelin's SafeMath library, when used correctly, protects against such bugs
 // More info: https://www.nccgroup.trust/us/about-us/newsroom-and-events/blog/2018/november/smart-contract-insecurity-bad-arithmetic/
 
 //import "../node_modules/openzeppelin-solidity/contracts/math/SafeMath.sol";
@@ -26,6 +28,9 @@ contract FlightSuretyApp {
 
     address private contractOwner;          // Account used to deploy contract
 
+    FlightSuretyData flightSuretyData = new FlightSuretyData();
+    bool operational = flightSuretyData.isOperational();
+
     struct Flight {
         bool isRegistered;
         uint8 statusCode;
@@ -47,10 +52,9 @@ contract FlightSuretyApp {
     *      This is used on all state changing functions to pause the contract in 
     *      the event there is an issue that needs to be fixed
     */
-    modifier requireIsOperational() 
-    {
+    modifier requireIsOperational(){
          // Modify to call data contract's status
-        require(true, "Contract is currently not operational");  
+        require(operational, "Contract is currently not operational");
         _;  // All modifiers require an "_" which indicates where the function body will be added
     }
 
@@ -71,11 +75,7 @@ contract FlightSuretyApp {
     * @dev Contract constructor
     *
     */
-    constructor
-                                (
-                                ) 
-                                public 
-    {
+    constructor () public {
         contractOwner = msg.sender;
     }
 
@@ -83,12 +83,8 @@ contract FlightSuretyApp {
     /*                                       UTILITY FUNCTIONS                                  */
     /********************************************************************************************/
 
-    function isOperational() 
-                            public 
-                            pure 
-                            returns(bool) 
-    {
-        return true;  // Modify to call data contract's status
+    function isOperational() public view returns(bool) {
+        return operational;  // Modify to call data contract's status
     }
 
     /********************************************************************************************/
@@ -100,13 +96,8 @@ contract FlightSuretyApp {
     * @dev Add an airline to the registration queue
     *
     */   
-    function registerAirline
-                            (   
-                            )
-                            external
-                            pure
-                            returns(bool success, uint256 votes)
-    {
+    function registerAirline () external pure returns(bool success, uint256 votes){
+        // flightSuretyData.registerAirline(_address, _name);
         return (success, 0);
     }
 
@@ -208,12 +199,7 @@ contract FlightSuretyApp {
 
 
     // Register an oracle with the contract
-    function registerOracle
-                            (
-                            )
-                            external
-                            payable
-    {
+    function registerOracle() external payable {
         // Require registration fee
         require(msg.value >= REGISTRATION_FEE, "Registration fee is required");
 
@@ -334,4 +320,4 @@ contract FlightSuretyApp {
 
 // endregion
 
-}   
+}

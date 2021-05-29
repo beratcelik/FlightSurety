@@ -16,8 +16,18 @@ To install, download or clone the repo, then:
 
 To run truffle tests:
 
-`test ./test/flightSurety.js`
-`test ./test/oracles.js`
+`ganache-cli -a 50`
+
+open a new terminal
+
+`truffle test`
+
+or to test seperately
+
+`truffle test ./test/flightSurety.js`
+
+`truffle test ./test/oracles.js`
+
 
 To use the dapp:
 
@@ -32,6 +42,7 @@ To view dapp:
 `http://localhost:8000`
 
 ## Develop Server
+Open a new terminal
 
 `npm run server`
 `truffle test ./test/oracles.js`
