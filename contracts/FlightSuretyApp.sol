@@ -96,8 +96,8 @@ contract FlightSuretyApp {
     * @dev Add an airline to the registration queue
     *
     */   
-    function registerAirline () external pure returns(bool success, uint256 votes){
-        // flightSuretyData.registerAirline(_address, _name);
+    function registerAirline (address _address) external returns(bool success, uint256 votes){
+        flightSuretyData.registerAirline(_address);
         return (success, 0);
     }
 
@@ -157,7 +157,7 @@ contract FlightSuretyApp {
 // region ORACLE MANAGEMENT
 
     // Incremented to add pseudo-randomness at various points
-    uint8 private nonce = 0;    
+    uint8 private nonce = 0;
 
     // Fee to be paid when registering oracle
     uint256 public constant REGISTRATION_FEE = 1 ether;

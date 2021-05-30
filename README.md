@@ -20,10 +20,6 @@ To run truffle tests:
 
 open a new terminal
 
-`truffle test`
-
-or to test seperately
-
 `truffle test ./test/flightSurety.js`
 
 `truffle test ./test/oracles.js`
